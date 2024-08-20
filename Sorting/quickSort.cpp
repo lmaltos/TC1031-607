@@ -5,7 +5,7 @@ int particion(int arr[],int ini,int fin);
 void quickSort(int arr[], int ini, int fin) {
     if (ini < fin) {
         int pivote = particion(arr,ini,fin);
-        quickSort(arr,ini,pivote - 1);
+        quickSort(arr,ini,pivote);
         quickSort(arr,pivote + 1,fin);
     }
 }
