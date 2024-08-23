@@ -5,7 +5,7 @@ template <typename S>
 void print(S[],int);
 
 using namespace std;
-int main() {
+int main_old() {
     char char_arr[10] = {'q','w','e','r','t','y','a','s','d','f'};
     int my_arreglo_int[8] = {15,22,13,27,12,10,20,25};
     string my_arreglo[8] = {"hola", "mundo", "quick", "sort", "merge", "bubble", "intercambio", "insercion"};
@@ -66,4 +66,21 @@ void insertionSort(int arr[], int n) {
         }
         arr[j] = key;
     }    
+}
+
+#include "Fecha.h"
+
+int main() {
+    Date Fechas[20];
+    for(int i = 0; i < 20; i++) {
+        Fechas[i].setYear(2000 + rand() % 10);
+        Fechas[i].setMonth(1 + rand() % 12);
+        Fechas[i].setDay(1 + rand() % 31);
+    }
+    print(Fechas,20);
+    cout << endl;
+    cout << "Llama quickSort" << endl;
+    quickSort(Fechas,0,20);
+    print(Fechas,20);
+    cout << endl;
 }
