@@ -13,4 +13,5 @@ class Fecha {
   public:
     Fecha(std::string, int, std::string);
     void print();
+    bool operator<(Fecha&);
 };

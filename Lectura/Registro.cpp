@@ -23,3 +23,7 @@ void Registro::print() {
     fecha.print();
     std::cout << " " << ip << " " << mensaje;
 }
+
+bool Registro::operator<(Registro& v) {
+    return fecha < v.fecha; // llamamos comparacion entre fechas
+} 

@@ -28,3 +28,33 @@ Fecha::Fecha(string mes, int dia, string hhmmss)
 void Fecha::print() {
     cout << mes << " " << dia << " " << hhmmss;
 }
+
+bool Fecha::operator<(Fecha& v) {
+    if (m < v.m)
+        return true;
+    else if (m > v.m)
+        return false;
+
+    if (dia < v.dia)
+        return true;
+    else if (dia > v.dia)
+        return false;
+
+    if (hh < v.hh)
+        return true;
+    else if (hh > v.hh)
+        return false;
+
+    if (mm < v.mm)
+        return true;
+    else if (mm > v.mm)
+        return false;
+
+    
+    if (ss < v.ss)
+        return true;
+    else if (ss > v.ss)
+        return false;
+    
+    return false;
+}

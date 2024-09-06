@@ -12,4 +12,5 @@ class Registro {
     Registro(std::string, int, std::string, std::string, std::string);
     Registro(Fecha, std::string, std::string);
     void print();
+    bool operator<(Registro&);
 };

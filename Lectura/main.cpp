@@ -19,6 +19,13 @@ int main(int argc, char* argv[]) {
     int n;
     cin >> n;
     registros[n].print();
+    cout << endl;
+    cout << "Contra cual quieres comparar? : ";
+    int m;
+    cin >> m;
+    registros[m].print();
+    cout << endl;
+    cout << "El registro " << (registros[n] < registros[m] ? n : m) << " es menor" << endl;
     return 0;
 }
 
@@ -38,6 +45,4 @@ void leerArchivo(string nombreArchivo, vector<Registro>& registros) {
         registros.push_back(r);
     }
     s.close(); // hay que cerrar nuestro archivo al terminar la lectura
-    cout << "Ultima linea del archivo: ";
-    cout << mes << " " << dia << " " << hora << " " << ip << " " << mensaje << endl;
 }
