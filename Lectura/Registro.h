@@ -1,9 +1,10 @@
 #pragma once
 #include <string>
 #include "Fecha.h"
+#include <fstream>
 
 class Registro {
-  private:
+  protected:
     Fecha fecha;
     std::string ip;
     std::string mensaje;
@@ -13,4 +14,5 @@ class Registro {
     Registro(Fecha, std::string, std::string);
     void print();
     bool operator<(Registro&);
+    friend std::ifstream& operator>>(std::ifstream&,Registro&);
 };

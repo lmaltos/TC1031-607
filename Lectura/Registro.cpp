@@ -26,4 +26,15 @@ void Registro::print() {
 
 bool Registro::operator<(Registro& v) {
     return fecha < v.fecha; // llamamos comparacion entre fechas
-} 
+}
+
+std::ifstream& operator>>(std::ifstream& s,Registro& v) {
+    std::string mes;
+    int dia;
+    std::string hora;
+    s >> mes >> dia >> hora >> v.ip;
+    Fecha f(mes,dia,hora);
+    v.fecha = f;
+    getline(s,v.mensaje);
+    return s;
+}

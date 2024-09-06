@@ -32,16 +32,9 @@ int main(int argc, char* argv[]) {
 void leerArchivo(string nombreArchivo, vector<Registro>& registros) {
     ifstream s;
     s.open(nombreArchivo);
-
-    string mes;
-    int dia;
-    string hora;
-    string ip;
-    string mensaje;
+    Registro r;
     while (!s.eof()) {
-        s >> mes >> dia >> hora >> ip;
-        getline(s,mensaje); // lee el resto de lina (que contiene el mensaje completo)
-        Registro r(mes,dia,hora,ip,mensaje);
+        s >> r;
         registros.push_back(r);
     }
     s.close(); // hay que cerrar nuestro archivo al terminar la lectura
