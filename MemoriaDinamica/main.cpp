@@ -1,4 +1,5 @@
 #include <iostream>
+#include "vector.h"
 
 using namespace std;
 
@@ -14,7 +15,38 @@ void Decalogo10();
 void arreglo();
 
 int main() {
-    arreglo();
+    vector v;
+
+    v.add(rand()%10);
+    v.add(rand()%10);
+    v.add(rand()%10);
+    v.add(rand()%10);
+    v.add(rand()%10);
+    for (int i = 0; i < v.getsize(); i++) {
+        cout << v.get(i) << " ";
+    }
+    cout << endl;
+
+    cout << "remove(2)" << endl;
+    v.remove(2);
+    for (int i = 0; i < v.getsize(); i++) {
+        cout << v.get(i) << " ";
+    }
+    cout << endl;
+
+    cout << "setzie(10)" << endl;
+    v.setsize(10);
+    for (int i = 0; i < v.getsize(); i++) {
+        cout << v.get(i) << " ";
+    }
+    cout << endl;
+
+    cout << "setzie(3)" << endl;
+    v.setsize(3);
+    for (int i = 0; i < v.getsize(); i++) {
+        cout << v.get(i) << " ";
+    }
+    cout << endl;
     return 0;
 }
 
