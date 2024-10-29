@@ -11,6 +11,7 @@ class AVL : public BST<T> {
     void cambiarPadre(nodeT<T>*,nodeT<T>*);
   public:
     void add(T);
+    void erase(T);
 };
 
 template <class T>
@@ -31,15 +32,39 @@ void AVL<T>::add(T data) {
     if (B->getData() > data) {
         // ToDo
         A = B->getLeft();
-        std::cout << "warning: funcion no implementada" << std::endl;
+        if (A->getData() > data) {
+            // Caso: RSD
+            cout << "RSD B: " << B->getData() << " A: " << A->getData() << endl;
+            B->setLeft(A->getRight());
+            A->setRight(B);
+            cambiarPadre(B,A);
+        }
+        else {
+            // Caso: RDD
+            nodeT<T> *C = A->getRight();
+            cout << "RDD B: " << B->getData() << " A: " << A->getData() << " C: " << C->getData() << endl;
+            A->setRight(C->getLeft());
+            B->setLeft(C->getRight());
+            C->setLeft(A);
+            C->setRight(B);
+            cambiarPadre(B,C);
+        }
     }
     else {
         A = B->getRight();
         if (A->getData() > data) {
-            std::cout << "warning: funcion no implementada" << std::endl;
+            // caso RDI
+            nodeT<T> *C = A->getLeft();
+            cout << "RDI B: " << B->getData() << " A: " << A->getData() << " C: " << C->getData() << endl;
+            B->setRight(C->getLeft());
+            A->setLeft(C->getRight());
+            C->setLeft(B);
+            C->setRight(A);
+            cambiarPadre(B,C);
         }
         else {
             // caso RSI: Rotacion Simple a la Izquierda
+            cout << "RSI B: " << B->getData() << " A: " << A->getData() << endl;
             B->setRight(A->getLeft());
             A->setLeft(B);
             cambiarPadre(B,A);
@@ -99,4 +124,39 @@ void AVL<T>::cambiarPadre(nodeT<T>* B,nodeT<T>* A){
     else {
         padre->setRight(A);
     }
+}
+
+template <class T>
+void AVL<T>::erase(T data) {
+    BST<T>::erase(data);
+    if (isBalanced(data)) {
+        return;
+    }
+    nodeT<T> *p, *B;
+    do {
+        p = BST<T>::root;
+        B = nullptr;
+        cout << "Busca rebalancear" << endl;
+        while (p != nullptr) {
+            if (!isBalanced(p)) {
+                B = p; // ancestro no balanceado
+            }
+            p = p->getData() > data ? p->getLeft() : p->getRight();
+        }
+        int i = altura(B->getLeft());
+        int d = altura(B->getRight());
+        nodeT<T> *A;
+        if (i < d) {
+            A = B->getRight();
+            B->setRight(A->getLeft());
+            A->setLeft(B);
+            cambiarPadre(B,A);
+        }
+        else {
+            A = B->getLeft();
+            B->setLeft(A->getRight());
+            A->setRight(B);
+            cambiarPadre(B,A);
+        }
+    } while (!isBalanced(data));
 }

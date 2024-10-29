@@ -5,8 +5,12 @@ using namespace std;
 int main() {
     AVL<int> x;
     for (int i = 1; i < 32; i++) {
-        x.add(i);
-        x.preorden();
+        x.add(rand()%100);
+        if (i%5 == 0) x.preorden();
+    }
+    x.pornivel();
+    for (int i = 1; i < 50; i++) {
+        x.erase(rand()%100);
     }
     return 0;
 }
