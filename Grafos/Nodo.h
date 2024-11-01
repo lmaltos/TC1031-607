@@ -56,6 +56,7 @@ bool Nodo<T>::isAdyacente(Nodo<T>* n) {
     while (p != nullptr) {
         if (p->getEtiqueta() == n->getEtiqueta())
             return true;
+        p = p->getNext();
     }
     return false;
 }
