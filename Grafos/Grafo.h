@@ -16,6 +16,7 @@ class Grafo {
     void removeAdyacencia(T,T);
     Nodo<T>* getNodo(T);
     bool getAdyacencia(T,T);
+    void deepfirst();
 };
 
 template <class T>
@@ -132,4 +133,41 @@ bool Grafo<T>::getAdyacencia(T tag1,T tag2) {
     return a->isAdyacente(b);
   }
   return false;
+}
+
+#include <stack>
+#include <iostream>
+template <class T>
+void Grafo<T>::deepfirst() {
+  // Marcar todos los nodos en espera
+  Nodo<T> *a = first;
+  while (a != nullptr) {
+    a->s = EnEspera;
+    a = a->getNext();
+  }
+  a = first;
+  std::stack<Nodo<T>*> pila;
+  while (a != nullptr) {
+    if (a->s == EnEspera) {
+      pila.push(a);
+    }
+    while (!pila.empty()) {
+      Nodo<T> *b = pila.top();
+      pila.pop(); // se remueve el primer elemento
+      if (b->s != Procesado) {
+        std::cout << b->getEtiqueta() << " ";
+        b->s = Procesado;
+        // Agregar vecinos en espera
+        Nodo<T> *c = first;
+        while (c != nullptr) {
+          if (b->isAdyacente(c) && c->s == EnEspera) {
+            pila.push(c);
+          }
+          c = c->getNext();
+        }
+      }
+    }
+    a = a->getNext();
+  }
+  std::cout << std::endl;
 }

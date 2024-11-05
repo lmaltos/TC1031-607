@@ -1,6 +1,11 @@
 #pragma once
 #include "Adyacencia.h"
 
+enum Estatus {
+    EnEspera,
+    Procesado,
+};
+
 template <class T>
 class Nodo {
   private:
@@ -8,6 +13,7 @@ class Nodo {
     Nodo *next;
     Adyacencia<T> *first;
   public:
+    Estatus s;
     Nodo(T);
     ~Nodo();
     Nodo<T>* getNext();
